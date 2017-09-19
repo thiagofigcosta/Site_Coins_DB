@@ -1,0 +1,47 @@
+{%extends "base.html"%}
+{%block title%} Collection █ {{block.super}}{%endblock%}
+
+{%block content%}
+<form class='form' method='GET' action='.'>
+<input type='text' placeholder="Search.." name='q' value='{{ request.GET.q }}'>
+<!-- </br> -->
+	&emsp;
+	<input type='checkbox' name='showcoins' onChange="this.form.submit()" value='{{ request.GET.showcoins }}' 
+	{% if request.GET.showcoins is not None %} checked {%endif%}> Mostrar Moedas
+	&emsp;
+	<input type='checkbox' name='shownotes' onChange="this.form.submit()" value='{{ request.GET.shownotes }}' {% if request.GET.shownotes is not None %} checked {%endif%}> Mostrar cédulas
+	<!-- </br> -->
+	&emsp;Ordenar: 
+	<select name='sorter' id='srt' onChange="this.form.submit()">
+	  <option value="newer" {% if request.GET.sorter == 'newer' %} selected="selected" {%endif%}>Adicionadas recentemente</option>
+	  <option value="older" {% if request.GET.sorter == 'older' %} selected="selected" {%endif%}>Adicionadas a mais tempo</option>
+	  <option value="conser" {% if request.GET.sorter == 'conser' %} selected="selected" {%endif%}>Conservação</option>
+	  <option value="value" {% if request.GET.sorter == 'value' %} selected="selected" {%endif%}>Mais Valiosas</option>
+	  <option value="valueless" {% if request.GET.sorter == 'valueless' %} selected="selected" {%endif%}>Menos Valiosas</option>
+	  <option value="year" {% if request.GET.sorter == 'year' %} selected="selected" {%endif%}>Mais velhas</option>
+   	  <option value="year-" {% if request.GET.sorter == 'year-' %} selected="selected" {%endif%}>Mais novas</option>
+   	  <option value="country" {% if request.GET.sorter == 'country' %} selected="selected" {%endif%}>País</option>
+   	  <option value="decript" {% if request.GET.sorter == 'decript' %} selected="selected" {%endif%}>Descrição</option>
+	</select></br></br>
+	<button class='btn btn-default' type='submit'>Search</button>
+</form>
+
+<hr/>
+<ul>
+	{%for coin in object_list%}<!--object_list has to have this name-->
+	<li><a href='{{coin.get_absolute_url}}'>
+	{%if coin.isCoin == 1%}
+		Moeda
+	{%else%}
+		Cédula
+	{%endif%} - {{ coin }}</a></li>
+	{%if coin.have == 1%}
+	Conservation: {{coin.conservation}} 
+	{%endif%}
+	{%if 	coin.description%}
+	<ul><li>{{coin.description}}</li></ul>
+    {%endif%}
+    </li>
+	{%endfor%}
+</ul>
+{%endblock%}

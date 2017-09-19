@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+	<meta charset="utf-8" />
+	<title>All about my coins</title>
+</head>
+<body>
+	<h1>Rare Coins</h1>
+	<p>Site para documentar minhas <abbr title="Somente as raras e antigas">moedas e cédulas.</abbr>!</p>
+	<p>Substituição de strings com python3 {{var_method}}</p>
+	<p>Qual o poder do Django?  {{django_power}}: It's over 9000!!!</p>
+	<p>That number was a 
+	{%if django_power|divisibleby:"2"%}
+		even number!
+	{%else%}
+		odd number!
+	{%endif%}
+	</p>
+	<p>If statements:
+	{%if rand_bool == True%}
+		<p>Sou um cara de sorte</p>
+	{%endif%}</p>
+	{%verbatim%}
+	<p>Tudo isso foi feito usando {{variáveis}}, {%if%}, {%for%}, dentre outras built-in tags de template.</p>
+	{%endverbatim%}
+	<p>Lets talk about the coins, qual tipo de moedas e cédulas você guarda Thiago?</p>
+	<ul>
+	{%for itr_item in coin_list%}
+		<li>{{itr_item}}</li>
+	{%endfor%}
+	</ul>
+	<br><a href="/learn">main page</a>
+</body>
+</html>

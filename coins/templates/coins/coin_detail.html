@@ -1,0 +1,48 @@
+{%extends "base.html"%}
+{%block title%} Collection █ {{block.super}}{%endblock%}
+{%block content%}
+<h3>{{object}}({{object.id}})</h3>
+<p><a href='{{object.get_update_url}}'>Edit</a></p>
+<hr>
+
+{%if object.isCoin == 1%}
+	<h5>Moeda de {{object.year}}</br></h5>
+{%else%}
+	<h5>Cédula de {{object.year}}</br></h5>
+{%endif%}
+<ul>
+	<li>Valor: {{object.value}} {{object.unit}}</li>
+	<li>Origem: {{object.country}}</li>
+	{%if object.have == 1%}
+	<li>Conservação: {{object.conservation}}</li>
+	{%endif%}
+	{%if object.marketPrice != 0%}
+		<li>Valor comercial: {{object.marketPrice}}</li>
+	{%endif%}
+	{%if object.description%}
+		<ul><li>{{object.description}}</li></ul>
+	{%endif%}					
+	</br></br>
+	<li>Frente</li>
+	<ul><li>
+		{%if object.photoFront%}
+			<img src="{{object.photoFront.url}}" width="120" alt={{object.photoFront.name}}/>
+		{%else%}
+			<img src="/media/photos/unknown.jpg" width="120" alt=unknown/>
+		{%endif%}
+	</li></ul>
+	<li>Verso</li>
+	<ul><li>
+		{%if object.photoBack%}
+			<img src="{{object.photoBack.url}}" width="120" alt={{object.photoBack.name}}/>
+		{%else%}
+			<img src="/media/photos/unknown.jpg" width="120" alt=unknown/>
+		{%endif%}
+	</li></ul>
+</ul>
+
+</br>
+
+
+<a href='{%url "coins:collection"%}{{collection_context}}'>Go back</a>
+{%endblock%}

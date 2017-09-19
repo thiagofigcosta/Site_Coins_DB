@@ -1,0 +1,13 @@
+{%extends "base.html"%}
+{%block title%} {{title}} █ {{block.super}}{%endblock%}
+{%block content%}
+<h3>Add a coin</h3>
+{% if form.errors.non_field_erros %}
+{{ form.errors.non_field_erros }}
+{% endif %}
+<form method="POST" enctype="multipart/form-data"> {%csrf_token%}
+	{{ form.as_p }}
+    <button type='submit'>{{title}}</button>
+</form>
+<a href='{%url "home"%}'>Go back</a>
+{%endblock%}
